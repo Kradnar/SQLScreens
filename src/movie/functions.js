@@ -22,8 +22,17 @@ exports.readMovie = async (movieObj) => {
 
 exports.filterMovie = async (movieObj) => {
   try{
-    const results = await Movie.findAll({where:{title: movieObj.title, actor:movieObj.actor}});
-    console.log(results);
+    if (movieObj.title) {
+      const results = await Movie.findAll({where:{title: movieObj.title}});
+      console.log(results);
+    }
+    else if (movieObj.actor) {
+      const results = await Movie.findAll({where:{actor:movieObj.actor}});
+      console.log(results);
+    }
+    else {
+      console.log("Please enter --movie or --actor you wish to filter by")
+    }
   }
   catch(error) {
     console.log(error);
